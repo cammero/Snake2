@@ -1,9 +1,14 @@
-package com.clara;
+package com.cameo;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
-import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /** This class responsible for displaying the graphics, so the snake, grid, kibble, instruction text and high score
  * 
@@ -23,7 +28,8 @@ public class DrawSnakeGamePanel extends JPanel {
 		this.kibble = k;
 		this.score = sc;
 	}
-	
+
+	//sets size of window
 	public Dimension getPreferredSize() {
         return new Dimension(SnakeGame.xPixelMaxDimension, SnakeGame.yPixelMaxDimension);
     }
@@ -83,7 +89,7 @@ public class DrawSnakeGamePanel extends JPanel {
 		g.drawString("HIGH SCORE = " + textHighScore, 150, 300);
 		g.drawString(newHighScore, 150, 400);
 		
-		g.drawString("press a key to play again", 150, 350);
+		g.drawString("Press a key to play again", 150, 350);
 		g.drawString("Press q to quit the game",150,400);		
     			
 	}
@@ -102,7 +108,7 @@ public class DrawSnakeGamePanel extends JPanel {
 		
 		g.clearRect(0, 0, maxX, maxY);
 
-		g.setColor(Color.RED);
+		g.setColor(Color.BLUE);
 
 		//Draw grid - horizontal lines
 		for (int y=0; y <= maxY ; y+= squareSize){			
@@ -116,36 +122,55 @@ public class DrawSnakeGamePanel extends JPanel {
 
 	private void displayKibble(Graphics g) {
 
-		//Draw the kibble in green
-		g.setColor(Color.GREEN);
+		//Image help https://docs.oracle.com/javase/tutorial/2d/images/drawimage.html
+		Image kibbleImage;
+		ImageIcon pinkMouse = new ImageIcon("C:\\Users\\Cameo\\OneDrive\\Java Class\\pinkMouse.png");
+		kibbleImage = pinkMouse.getImage();
+
+//		//Draw the kibble in red
+//		g.setColor(Color.RED);
+
 
 		int x = kibble.getKibbleX() * SnakeGame.squareSize;
 		int y = kibble.getKibbleY() * SnakeGame.squareSize;
 
-		g.fillRect(x+1, y+1, SnakeGame.squareSize-2, SnakeGame.squareSize-2);
+		g.drawImage(kibbleImage, x+1, y+1, SnakeGame.squareSize-2, SnakeGame.squareSize-2, this);
+		//g.fillRect(x+1, y+1, SnakeGame.squareSize-2, SnakeGame.squareSize-2);
 		
 	}
 
 	private void displaySnake(Graphics g) {
 
 		LinkedList<Point> coordinates = snake.segmentsToDraw();
-		
-		//Draw head in grey
-		g.setColor(Color.LIGHT_GRAY);
+
+		//Draw head in gray
+		//g.setColor(Color.LIGHT_GRAY);
+
+		//Draw head
+		Image headImage;
+		ImageIcon snakeHead = new ImageIcon("C:\\Users\\Cameo\\OneDrive\\Java Class\\cartoonSnakeRoundHead.png");
+		headImage = snakeHead.getImage();
+
 		Point head = coordinates.pop();
-		g.fillRect((int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+		g.drawImage(headImage, (int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize, this);
+		//g.fillRect((int)head.getX(), (int)head.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		
 		//Draw rest of snake in black
-		g.setColor(Color.BLACK);
+		Image bodyImage;
+		ImageIcon snakeBody = new ImageIcon("C:\\Users\\Cameo\\OneDrive\\Java Class\\snakeBodySection.png");
+		bodyImage = snakeBody.getImage();
+		//g.setColor(Color.BLACK);
 		for (Point p : coordinates) {
-			g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+			g.drawImage(bodyImage, (int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize, this);
+			//g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
 		}
-
 	}
 
+	private void displayRock(Graphics g) {}
+
 	private void displayInstructions(Graphics g) {
-        g.drawString("Press any key to begin!",100,200);		
-        g.drawString("Press q to quit the game",100,300);		
+        g.drawString("Press any key to begin!",150,200);
+        g.drawString("Press q to quit the game",150,300);
     	}
 	
     

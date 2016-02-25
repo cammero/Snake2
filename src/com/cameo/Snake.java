@@ -1,4 +1,4 @@
-package com.clara;
+package com.cameo;
 
 import java.awt.Point;
 import java.util.LinkedList;
@@ -19,7 +19,7 @@ public class Snake {
 	//A non-zero number means part of the snake is in the square
 	//The head of the snake is 1, rest of segments are numbered in order
 
-	private int currentHeading;  //Direction snake is going in, ot direction user is telling snake to go
+	private int currentHeading;  //Direction snake is going in, or direction user is telling snake to go
 	private int lastHeading;    //Last confirmed movement of snake. See moveSnake method
 	
 	private int snakeSize;   //size of snake - how many segments?
@@ -158,6 +158,9 @@ public class Snake {
 			}
 		}
 
+		//snake head modified from http://www.how-to-draw-funny-cartoons.com/draw-a-snake.html
+
+
 		//now identify where to add new snake head
 		if (currentHeading == DIRECTION_UP) {		
 			//Subtract 1 from Y coordinate so head is one square up
@@ -177,10 +180,24 @@ public class Snake {
 		}
 
 		//Does this make snake hit the wall?
+		//TODO create user options to use warp walls or not
+		boolean warpWallsOn = true;
 		if (snakeHeadX >= maxX || snakeHeadX < 0 || snakeHeadY >= maxY || snakeHeadY < 0 ) {
-			hitWall = true;	
-			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
-			return;
+			if (warpWallsOn = false) {
+				hitWall = true;
+				SnakeGame.setGameStage(SnakeGame.GAME_OVER);
+				return;
+			}
+			else{
+				hitWall = false;
+				if (snakeHeadX >= maxX || snakeHeadX < 0) {
+					snakeHeadX = maxX - Math.abs(snakeHeadX);
+				}
+				else if (snakeHeadY >= maxY || snakeHeadY < 0){
+					snakeHeadY = maxY - Math.abs(snakeHeadY);
+				}
+
+			}
 		}
 
 		//Does this make the snake eat its tail?
@@ -215,12 +232,10 @@ public class Snake {
 		}
 		
 		lastHeading = currentHeading; //Update last confirmed heading
-
 	}
 
 	protected boolean didHitWall(){
 		return hitWall;
-
 	}
 
 	protected boolean didEatTail(){
@@ -235,6 +250,7 @@ public class Snake {
 	}
 
 	public boolean didEatKibble(Kibble kibble) {
+		//If the x,y coordinants equal the x,y coordinants of the head, the snake is considered to have eaten the kibble, and should grow
 		//Is this kibble in the snake? It should be in the same square as the snake's head
 		if (kibble.getKibbleX() == snakeHeadX && kibble.getKibbleY() == snakeHeadY){
 			justAteMustGrowThisMuch += growthIncrement;

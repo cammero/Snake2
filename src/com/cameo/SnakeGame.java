@@ -1,9 +1,8 @@
-package com.clara;
+package com.cameo;
 
 import java.util.Timer;
 
 import javax.swing.*;
-
 
 public class SnakeGame {
 
@@ -32,7 +31,7 @@ public class SnakeGame {
 	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening. 
 	//Other classes like Snake and DrawSnakeGamePanel will need to query this, and change its value
 
-	protected static long clockInterval = 500; //controls game speed
+	protected static long clockInterval = 400; //controls game speed
 	//Every time the clock ticks, the snake moves
 	//This is the time between clock ticks, in milliseconds
 	//1000 milliseconds = 1 second.
@@ -93,8 +92,6 @@ public class SnakeGame {
 			}
 		});
 	}
-
-
 
 	public static int getGameStage() {
 		return gameStage;

@@ -1,4 +1,4 @@
-package com.clara;
+package com.cameo;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -60,7 +60,6 @@ public class GameControls implements KeyListener{
 			//System.out.println("snake right");
 			snake.snakeRight();
 		}
-
 	}
 
 
@@ -79,5 +78,4 @@ public class GameControls implements KeyListener{
 			System.exit(0);    //quit if user presses the q key.
 		}
 	}
-
 }

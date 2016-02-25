@@ -1,5 +1,6 @@
-package com.clara;
+package com.cameo;
 
+import javax.swing.*;
 import java.util.Random;
 
 public class Kibble {
@@ -8,9 +9,13 @@ public class Kibble {
 	 * Any square is ok, so long as it doesn't have any snake segments in it. 
 	 * There is only one Kibble and when the snake eats it, then it moves. 
 	 */
-	
-	private int kibbleX; //This is the square number (not pixel)
-	private int kibbleY;  //This is the square number (not pixel)
+
+	//Mouse image obtained from http://www.clker.com/clipart-pink-mouse-2.html
+	//Learned of ImageIcon class from http://zetcode.com/tutorials/javagamestutorial/snake/
+
+	ImageIcon mouse = new ImageIcon("pinkMouse.png");
+	private int kibbleX; //This is the x-coordinant square number (not pixel)
+	private int kibbleY;  //This is the y-coordinant square number (not pixel)
 	
 	public Kibble(Snake s){
 		//Kibble needs to know where the snake is, so it does not create a kibble in the snake
@@ -30,8 +35,6 @@ public class Kibble {
 			kibbleY = rng.nextInt(SnakeGame.ySquares);
 			kibbleInSnake = s.isSnakeSegment(kibbleX, kibbleY);
 		}
-		
-		
 	}
 
 	public int getKibbleX() {
@@ -41,7 +44,4 @@ public class Kibble {
 	public int getKibbleY() {
 		return kibbleY;
 	}
-
-
-	
 }
