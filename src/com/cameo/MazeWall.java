@@ -54,32 +54,27 @@ public class MazeWall {
         //Useful for the Panel class to draw the maze wall
         LinkedList<Point> mazeWallSegmentCoordinates = new LinkedList<>();
         //make a Point for this segment's coordinates and add to list
+
         Point p = new Point(mazeWallStartX * squareSize , mazeWallStartY * squareSize);
         mazeWallSegmentCoordinates.add(p);
 
         Random r = new Random();
-        boolean verticleMazeWall = r.nextBoolean();
+        boolean verticalMazeWall = r.nextBoolean();
         int x = getMazeWallStartX();
         int y = getMazeWallStartY();
         //int count = 0;
-        if (verticleMazeWall){
+        if (verticalMazeWall){
             ArrayList<Integer> yCoor = new ArrayList<>();
             //for (y, y < mazeWallSize, y++){
                     p = new Point(x * squareSize , y+1 * squareSize);
                     mazeWallSegmentCoordinates.add(p);
-                    mazeWallStartX, mazeWallStartY, mazeWallSize, SnakeGame.squareSize);
+                    //mazeWallStartX, mazeWallStartY, mazeWallSize, SnakeGame.squareSize);
                 }
-            }
 
-        else{
-            mazeWallSegmentCoordinates.add(p);
-            mazeWallStartX, mazeWallStartY, SnakeGame.squareSize, mazeWallSize);
-        }
-
-
-
-
-
+//        else{
+//            mazeWallSegmentCoordinates.add(p);
+//            mazeWallStartX, mazeWallStartY, SnakeGame.squareSize, mazeWallSize);
+//        }
 
         return mazeWallSegmentCoordinates;
     }
