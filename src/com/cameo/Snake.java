@@ -31,6 +31,8 @@ public class Snake {
 	private int maxX, maxY, squareSize;  
 	private int snakeHeadX, snakeHeadY; //store coordinates of head - first segment
 
+	private boolean warpWallsOn = false;
+
 	public Snake(int maxX, int maxY, int squareSize){
 		this.maxX = maxX;
 		this.maxY = maxY;
@@ -86,7 +88,6 @@ public class Snake {
 			}
 		}
 		return segmentCoordinates;
-
 	}
 
 	public void snakeUp(){
@@ -158,9 +159,6 @@ public class Snake {
 			}
 		}
 
-		//snake head modified from http://www.how-to-draw-funny-cartoons.com/draw-a-snake.html
-
-
 		//now identify where to add new snake head
 		if (currentHeading == DIRECTION_UP) {		
 			//Subtract 1 from Y coordinate so head is one square up
@@ -179,31 +177,30 @@ public class Snake {
 			snakeHeadX ++ ;
 		}
 
-		//Does this make snake hit the wall?
-		//TODO create user options to use warp walls or not
-		boolean warpWallsOn = true;
+		//This makes snake hit the wall. Warp walls are initially turned off during the game. The user can turn warp
+        //walls on at any point during the game.
+
 		if (snakeHeadX >= maxX || snakeHeadX < 0 || snakeHeadY >= maxY || snakeHeadY < 0 ) {
-			if (warpWallsOn = false) {
+            //if warp walls are off, the snake hits the wall if the snake head moves off the
+			if (warpWallsOn == false){
 				hitWall = true;
 				SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 				return;
 			}
-			else{
+			if (warpWallsOn == true){
 				hitWall = false;
 				if (snakeHeadX >= maxX || snakeHeadX < 0) {
+					//absolute value http://www.tutorialspoint.com/java/java_numbers.htm
 					snakeHeadX = maxX - Math.abs(snakeHeadX);
 				}
 				else if (snakeHeadY >= maxY || snakeHeadY < 0){
 					snakeHeadY = maxY - Math.abs(snakeHeadY);
 				}
-
 			}
 		}
 
-		//Does this make the snake eat its tail?
-
+		//This makes the snake eat its tail
 		if (snakeSquares[snakeHeadX][snakeHeadY] != 0) {
-
 			ateTail = true;
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return;
@@ -212,9 +209,8 @@ public class Snake {
 		//Otherwise, game is still on. Add new head
 		snakeSquares[snakeHeadX][snakeHeadY] = 1; 
 
-		//If snake did not just eat, then remove tail segment
-		//to keep snake the same length.
-		//find highest number, which should now be the same as snakeSize+1, and set to 0
+		//If snake did not just eat, then remove tail segment to keep snake the same length.
+		//Find highest number, which should now be the same as snakeSize+1, and set to 0
 		
 		if (justAteMustGrowThisMuch == 0) {
 			for (int x = 0 ; x < maxX ; x++) {
@@ -226,7 +222,7 @@ public class Snake {
 			}
 		}
 		else {
-			//Snake has just eaten. leave tail as is.  Decrease justAte... variable by 1.
+			//Snake has just eaten. Leave tail as is. Decrease justAte... variable by 1.
 			justAteMustGrowThisMuch -- ;
 			snakeSize ++;
 		}
@@ -242,8 +238,13 @@ public class Snake {
 		return ateTail;
 	}
 
-	public boolean isSnakeSegment(int kibbleX, int kibbleY) {
-		if (snakeSquares[kibbleX][kibbleY] == 0) {
+	public void turnWarpWallsOn() {
+		this.warpWallsOn = true;
+	}
+
+    //checks to see if snake is at a specific location (X,Y coordinants)
+	public boolean isSnakeSegment(int Xcoordinant, int Ycoordinant) {
+		if (snakeSquares[Xcoordinant][Ycoordinant] == 0) {
 			return false;
 		}
 		return true;
@@ -294,19 +295,15 @@ public class Snake {
 		ateTail = false;
 		fillSnakeSquaresWithZeros();
 		createStartSnake();
-
 	}
 
 	public boolean isGameOver() {
 		if (hitWall == true || ateTail == true){
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return true;
-			
 		}
 		return false;
 	}
-
-
 }
 
 

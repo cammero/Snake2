@@ -33,6 +33,10 @@ public class GameControls implements KeyListener{
 		}
 		
 		if (SnakeGame.getGameStage() == SnakeGame.GAME_OVER){
+			//TODO fix game-over timing bug?
+			//SnakeGame.getTimer().cancel();
+
+            //SnakeGame..cancel();
 			snake.reset();
 			Score.resetScore();
 			
@@ -74,8 +78,12 @@ public class GameControls implements KeyListener{
 		//keyTyped events are for user typing letters on the keyboard, anything that makes a character display on the screen
 		char keyPressed = ev.getKeyChar();
 		char q = 'q';
-		if( keyPressed == q){
+		char w = 'w';
+		if (keyPressed == q){
 			System.exit(0);    //quit if user presses the q key.
+		}
+		if (keyPressed == w){
+			snake.turnWarpWallsOn();
 		}
 	}
 }

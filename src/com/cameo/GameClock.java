@@ -28,7 +28,7 @@ public class GameClock extends TimerTask {
 				break;
 			}
 			case SnakeGame.DURING_GAME: {
-				//
+
 				snake.moveSnake();
 				if (snake.didEatKibble(kibble) == true) {		
 					//tell kibble to update
@@ -45,11 +45,8 @@ public class GameClock extends TimerTask {
 				this.cancel();   //stop timer
 				break;
 			}
-			
-		
 		}
-				
+
 		gamePanel.repaint();		//In every circumstance, must update screen
-		
 	}
 }

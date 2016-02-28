@@ -13,7 +13,6 @@ public class Kibble {
 	//Mouse image obtained from http://www.clker.com/clipart-pink-mouse-2.html
 	//Learned of ImageIcon class from http://zetcode.com/tutorials/javagamestutorial/snake/
 
-	ImageIcon mouse = new ImageIcon("pinkMouse.png");
 	private int kibbleX; //This is the x-coordinant square number (not pixel)
 	private int kibbleY;  //This is the y-coordinant square number (not pixel)
 	

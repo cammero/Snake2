@@ -6,6 +6,8 @@ import javax.swing.*;
 
 public class SnakeGame {
 
+	//TODO Make Timer global
+
 	public final static int xPixelMaxDimension = 501;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
 	public final static int yPixelMaxDimension = 501;
 
@@ -17,6 +19,8 @@ public class SnakeGame {
 	protected static Snake snake ;
 
 	protected static Kibble kibble;
+
+	protected static MazeWall mazeWall;
 
 	protected static Score score;
 
@@ -52,7 +56,7 @@ public class SnakeGame {
 		snakeFrame.setVisible(true);
 		snakeFrame.setResizable(false);
 
-		snakePanel = new DrawSnakeGamePanel(snake, kibble, score);
+		snakePanel = new DrawSnakeGamePanel(snake, kibble, score, mazeWall);
 		snakePanel.setFocusable(true);
 		snakePanel.requestFocusInWindow(); //required to give this component the focus so it can generate KeyEvents
 
@@ -72,6 +76,7 @@ public class SnakeGame {
 		snake = new Snake(xSquares, ySquares, squareSize);
 		kibble = new Kibble(snake);
 		score = new Score();
+		mazeWall = new MazeWall(snake);
 
 		gameStage = BEFORE_GAME;
 	}
