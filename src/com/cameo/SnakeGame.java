@@ -1,20 +1,22 @@
 package com.cameo;
 
+import java.util.ArrayList;
 import java.util.Timer;
 
 import javax.swing.*;
 
 public class SnakeGame {
 
-	//TODO Make Timer global
+    //TODO Make Timer global?
+	public static Timer timer = new Timer();
 
-	public final static int xPixelMaxDimension = 501;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
-	public final static int yPixelMaxDimension = 501;
+	public final static int xPixelMaxDimension = 601;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
+	public final static int yPixelMaxDimension = 601;
 
 	public static int xSquares ;
 	public static int ySquares ;
 
-	public final static int squareSize = 50;
+	public final static int squareSize = 40;
 
 	protected static Snake snake ;
 
@@ -23,6 +25,8 @@ public class SnakeGame {
 	protected static MazeWall mazeWall;
 
 	protected static Score score;
+
+    protected static ArrayList<VisualComponentLargerThanASquare> visualComponentArrayList;
 
 	static final int BEFORE_GAME = 1;
 	static final int DURING_GAME = 2;
@@ -74,15 +78,19 @@ public class SnakeGame {
 		ySquares = yPixelMaxDimension / squareSize;
 
 		snake = new Snake(xSquares, ySquares, squareSize);
-		kibble = new Kibble(snake);
+
 		score = new Score();
 		mazeWall = new MazeWall(xSquares, ySquares, squareSize);
-
+        visualComponentArrayList = new ArrayList<>();
+        visualComponentArrayList.add(snake);
+        visualComponentArrayList.add(mazeWall);
+        kibble = new Kibble(visualComponentArrayList);
 		gameStage = BEFORE_GAME;
 	}
 
 	protected static void newGame() {
-		Timer timer = new Timer();
+		//TODO make timer global?
+		//Timer timer = new Timer();
 		GameClock clockTick = new GameClock(snake, kibble, score, snakePanel);
 		timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
 	}
@@ -112,4 +120,12 @@ public class SnakeGame {
 	public static void setGameStage(int gameStage) {
 		SnakeGame.gameStage = gameStage;
 	}
+
+    public static Timer getTimer() {
+        return timer;
+    }
+
+    public static void setTimer(Timer timer) {
+        SnakeGame.timer = timer;
+    }
 }

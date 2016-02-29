@@ -12,6 +12,7 @@ public class Snake extends VisualComponentLargerThanASquare{
 
 	private boolean hitWall = false;
 	private boolean ateTail = false;
+	private boolean hitComponent = false;
 
 	//private int snakeSquares[][];  //represents all of the squares on the screen
 	//NOT pixels!
@@ -96,11 +97,15 @@ public class Snake extends VisualComponentLargerThanASquare{
 		if (currentHeading == DIRECTION_RIGHT && lastHeading == DIRECTION_LEFT) {
 			currentHeading = DIRECTION_LEFT; //keep going the same way
 		}
-		
+
+		if (SnakeGame.mazeWall.isVisualComponentSegment(snakeHeadX, snakeHeadY)){
+			hitComponent = true;
+		}
+
 		//Did you hit the wall, snake? 
 		//Or eat your tail? Don't move. 
 
-		if (hitWall == true || ateTail == true) {
+		if (hitWall == true || ateTail == true || hitComponent == true) {
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return;
 		}
@@ -196,6 +201,8 @@ public class Snake extends VisualComponentLargerThanASquare{
 		lastHeading = currentHeading; //Update last confirmed heading
 	}
 
+
+
 	protected boolean didHitWall(){
 		return hitWall;
 	}
@@ -252,6 +259,9 @@ public class Snake extends VisualComponentLargerThanASquare{
 	public void reset() {
 		hitWall = false;
 		ateTail = false;
+        hitComponent = false;
+        warpWallsOn = false;
+
 		fillGameSquaresWithZeros();
 		createStartSnake();
 	}

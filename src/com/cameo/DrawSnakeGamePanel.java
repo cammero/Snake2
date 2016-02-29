@@ -72,7 +72,6 @@ public class DrawSnakeGamePanel extends JPanel {
         	break;
         }
         }
-
     }
 
 	private void displayGameWon(Graphics g) {
@@ -145,10 +144,10 @@ public class DrawSnakeGamePanel extends JPanel {
 		}
 	}
 
-
 	private void displayKibble(Graphics g) {
 
 		//Help with code for images-https://docs.oracle.com/javase/tutorial/2d/images/drawimage.html
+		//Mouse image obtained from http://www.clker.com/clipart-pink-mouse-2.html
 		Image kibbleImage;
 		ImageIcon pinkMouse = new ImageIcon("pinkMouse.png");
 		kibbleImage = pinkMouse.getImage();

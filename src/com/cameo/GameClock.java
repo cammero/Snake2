@@ -19,7 +19,6 @@ public class GameClock extends TimerTask {
 	@Override
 	public void run() {
 		// This method will be called every clock tick
-						
 		int stage = SnakeGame.getGameStage();
 
 		switch (stage) {
@@ -32,7 +31,7 @@ public class GameClock extends TimerTask {
 				snake.moveSnake();
 				if (snake.didEatKibble(kibble) == true) {		
 					//tell kibble to update
-					kibble.moveKibble(snake);
+					kibble.moveKibble(SnakeGame.visualComponentArrayList);
 					Score.increaseScore();
 				}
 				break;

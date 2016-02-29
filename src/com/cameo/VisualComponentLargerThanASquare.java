@@ -22,8 +22,8 @@ public class VisualComponentLargerThanASquare {
     }
 
     protected LinkedList<Point> segmentsToDraw(){
-        //Return a list of the actual x and y coordinates of the top left of each snake segment
-        //Useful for the Panel class to draw the snake
+        //Returns a list of the actual x and y coordinates of the top left of each component's segment
+        //Useful for the Panel class to draw the component
         LinkedList<Point> segmentCoordinates = new LinkedList<Point>();
         for (int segment = 1 ; segment <= size ; segment++ ) {
             //search array for each segment number
