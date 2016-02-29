@@ -6,27 +6,14 @@ import java.util.LinkedList;
 /**
  * Created by Cameo on 2/28/2016.
  */
-public class VisualComponentsLargerThanASquare {
+public class VisualComponentLargerThanASquare {
 
-    private int gameSquares[][];  //represents all of the squares on the screen
+    protected int gameSquares[][];  //represents all of the squares on the screen
+    protected int maxX, maxY, squareSize;
+    protected int size;   //number of segments (squares) of each component
+    protected int firstSegmentX, firstSegmentY; //store coordinates of the first segment
 
-    private int maxX, maxY, squareSize;
-
-    private int size;   //size of snake - how many segments?
-
-    private int firstSegmentX, firstSegmentY; //store coordinates of the first segment
-
-    public VisualComponentsLargerThanASquare(int maxX, int maxY, int squareSize){
-        this.maxX = maxX;
-        this.maxY = maxY;
-        this.squareSize = squareSize;
-        //Create and fill snakeSquares with 0s
-        gameSquares = new int[maxX][maxY];
-        fillGameSquaresWithZeros();
-        //createStartSnake();
-    }
-
-    private void fillGameSquaresWithZeros() {
+    protected void fillGameSquaresWithZeros() {
         for (int x = 0; x < this.maxX; x++){
             for (int y = 0 ; y < this.maxY ; y++) {
                 gameSquares[x][y] = 0;
@@ -34,7 +21,7 @@ public class VisualComponentsLargerThanASquare {
         }
     }
 
-    public LinkedList<Point> segmentsToDraw(){
+    protected LinkedList<Point> segmentsToDraw(){
         //Return a list of the actual x and y coordinates of the top left of each snake segment
         //Useful for the Panel class to draw the snake
         LinkedList<Point> segmentCoordinates = new LinkedList<Point>();
@@ -50,10 +37,10 @@ public class VisualComponentsLargerThanASquare {
                 }
             }
         }
-        //System.out.println(segmentCoordinates.toString());
         return segmentCoordinates;
     }
 
+    //Checks to see if component is at a specific location (X,Y coordinates)
     public boolean isVisualComponentSegment(int Xcoordinate, int Ycoordinate) {
         if (gameSquares[Xcoordinate][Ycoordinate] == 0) {
             return false;

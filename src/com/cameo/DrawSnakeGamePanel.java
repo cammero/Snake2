@@ -127,6 +127,7 @@ public class DrawSnakeGamePanel extends JPanel {
 		}
 	}
 
+    //TODO Change the display once the user turns warp walls on, so that they know they are on
 	protected void displayForWarpWallsOn(Graphics g){
 		int maxX = SnakeGame.xPixelMaxDimension;
 		int maxY= SnakeGame.yPixelMaxDimension;
@@ -165,10 +166,9 @@ public class DrawSnakeGamePanel extends JPanel {
     private void displayMazeWall(Graphics g){
 
         //TODO Once I have written the code the four maze walls the following should work
-        LinkedList<Point> theCoordinates = mazeWall.mazeWallSegmentsToDraw();
+        LinkedList<Point> theCoordinates = mazeWall.segmentsToDraw();
 
         for (Point p : theCoordinates){
-			System.out.println(p.getX() + " " + p.getY());
 			g.setColor(Color.BLACK);
 			g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
         }

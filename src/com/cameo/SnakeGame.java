@@ -8,8 +8,8 @@ public class SnakeGame {
 
 	//TODO Make Timer global
 
-	public final static int xPixelMaxDimension = 651;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
-	public final static int yPixelMaxDimension = 651;
+	public final static int xPixelMaxDimension = 501;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
+	public final static int yPixelMaxDimension = 501;
 
 	public static int xSquares ;
 	public static int ySquares ;
@@ -35,7 +35,7 @@ public class SnakeGame {
 	private static int gameStage = BEFORE_GAME;  //use this to figure out what should be happening. 
 	//Other classes like Snake and DrawSnakeGamePanel will need to query this, and change its value
 
-	protected static long clockInterval = 400; //controls game speed
+	protected static long clockInterval = 300; //controls game speed
 	//Every time the clock ticks, the snake moves
 	//This is the time between clock ticks, in milliseconds
 	//1000 milliseconds = 1 second.
@@ -56,7 +56,6 @@ public class SnakeGame {
 		snakeFrame.setVisible(true);
 		snakeFrame.setResizable(false);
 
-		//TODO this is what I changed
 		snakePanel = new DrawSnakeGamePanel(snake, kibble, score, mazeWall);
 		snakePanel.setFocusable(true);
 		snakePanel.requestFocusInWindow(); //required to give this component the focus so it can generate KeyEvents

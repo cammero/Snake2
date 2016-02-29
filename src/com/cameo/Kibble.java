@@ -24,16 +24,19 @@ public class Kibble {
 		moveKibble(s);
 	}
 	
-	protected void moveKibble(Snake s){
+	protected void moveKibble(VisualComponentLargerThanASquare v){
 		
 		Random rng = new Random();
-		boolean kibbleInSnake = true;
-		while (kibbleInSnake == true) {
+		boolean kibbleInVisualComponent = true;
+		while (kibbleInVisualComponent == true) {
 			//Generate random kibble location
 			kibbleX = rng.nextInt(SnakeGame.xSquares);
 			kibbleY = rng.nextInt(SnakeGame.ySquares);
-			kibbleInSnake = s.isSnakeSegment(kibbleX, kibbleY);
+			kibbleInVisualComponent = v.isVisualComponentSegment(kibbleX, kibbleY);
 		}
+	}
+	protected void moveKibble(MazeWall mw){
+
 	}
 
 	public int getKibbleX() {
