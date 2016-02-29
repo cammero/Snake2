@@ -22,12 +22,19 @@ public class DrawSnakeGamePanel extends JPanel {
 	private Snake snake;
 	private Kibble kibble;
 	private Score score;
-
+	private MazeWall mazeWall;
 	
 	DrawSnakeGamePanel(Snake s, Kibble k, Score sc){
 		this.snake = s;
 		this.kibble = k;
 		this.score = sc;
+	}
+
+	DrawSnakeGamePanel(Snake s, Kibble k, Score sc, MazeWall mw){
+		this.snake = s;
+		this.kibble = k;
+		this.score = sc;
+		this.mazeWall = mw;
 	}
 
 	//sets size of window
@@ -157,21 +164,15 @@ public class DrawSnakeGamePanel extends JPanel {
 
     private void displayMazeWall(Graphics g){
 
-        //MazeWall.createMazeWall(g);
-        //Draw the wall in black
+        //TODO Once I have written the code the four maze walls the following should work
+        LinkedList<Point> theCoordinates = mazeWall.mazeWallSegmentsToDraw();
 
-        /*TODO Once I have written the code the four maze walls the following should work
-        LinkedList<Point> theCoordinants = MazeWall.mazeWallSegmentsToDraw();
-
-        g.setColor(Color.BLACK);
-
-        for (Point p : theCoordinants){
-            g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
+        for (Point p : theCoordinates){
+			System.out.println(p.getX() + " " + p.getY());
+			g.setColor(Color.BLACK);
+			g.fillRect((int)p.getX(), (int)p.getY(), SnakeGame.squareSize, SnakeGame.squareSize);
         }
-        */
 
-
-//        g.setColor(Color.BLACK);
 //        g.fillRect(x+1, y+1, mazeWall.mazeWallSize, SnakeGame.squareSize);
     }
 

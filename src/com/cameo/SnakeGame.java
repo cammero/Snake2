@@ -8,8 +8,8 @@ public class SnakeGame {
 
 	//TODO Make Timer global
 
-	public final static int xPixelMaxDimension = 501;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
-	public final static int yPixelMaxDimension = 501;
+	public final static int xPixelMaxDimension = 651;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
+	public final static int yPixelMaxDimension = 651;
 
 	public static int xSquares ;
 	public static int ySquares ;
@@ -56,7 +56,8 @@ public class SnakeGame {
 		snakeFrame.setVisible(true);
 		snakeFrame.setResizable(false);
 
-		snakePanel = new DrawSnakeGamePanel(snake, kibble, score);
+		//TODO this is what I changed
+		snakePanel = new DrawSnakeGamePanel(snake, kibble, score, mazeWall);
 		snakePanel.setFocusable(true);
 		snakePanel.requestFocusInWindow(); //required to give this component the focus so it can generate KeyEvents
 
@@ -76,7 +77,7 @@ public class SnakeGame {
 		snake = new Snake(xSquares, ySquares, squareSize);
 		kibble = new Kibble(snake);
 		score = new Score();
-		mazeWall = new MazeWall(snake);
+		mazeWall = new MazeWall(xSquares, ySquares, squareSize);
 
 		gameStage = BEFORE_GAME;
 	}

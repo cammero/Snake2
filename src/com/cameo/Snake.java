@@ -3,7 +3,7 @@ package com.cameo;
 import java.awt.Point;
 import java.util.LinkedList;
 
-public class Snake {
+public class Snake{
 
 	final int DIRECTION_UP = 0;
 	final int DIRECTION_DOWN = 1;
@@ -31,13 +31,13 @@ public class Snake {
 	private int maxX, maxY, squareSize;  
 	private int snakeHeadX, snakeHeadY; //store coordinates of head - first segment
 
-	private boolean warpWallsOn = false;
+	private boolean warpWallsOn = false; //snake cannot go through walls without dying unless this is set to true
 
 	public Snake(int maxX, int maxY, int squareSize){
 		this.maxX = maxX;
 		this.maxY = maxY;
 		this.squareSize = squareSize;
-		//Create and fill snakeSquares with 0s 
+		//Create and fill snakeSquares with 0s
 		snakeSquares = new int[maxX][maxY];
 		fillSnakeSquaresWithZeros();
 		createStartSnake();
@@ -54,8 +54,8 @@ public class Snake {
 
 		snakeHeadX = screenXCenter;
 		snakeHeadY = screenYCenter;
-
-		snakeSize = 3;
+        System.out.println(snakeHeadX + " " + snakeHeadY);
+        snakeSize = 3;
 
 		currentHeading = DIRECTION_LEFT;
 		lastHeading = DIRECTION_LEFT;
@@ -178,7 +178,7 @@ public class Snake {
 		}
 
 		//This makes snake hit the wall. Warp walls are initially turned off during the game. The user can turn warp
-        //walls on at any point during the game.
+        //walls on at any point during the game by pressing w.
 
 		if (snakeHeadX >= maxX || snakeHeadX < 0 || snakeHeadY >= maxY || snakeHeadY < 0 ) {
             //if warp walls are off, the snake hits the wall if the snake head moves off the
@@ -242,16 +242,16 @@ public class Snake {
 		this.warpWallsOn = true;
 	}
 
-    //checks to see if snake is at a specific location (X,Y coordinants)
-	public boolean isSnakeSegment(int Xcoordinant, int Ycoordinant) {
-		if (snakeSquares[Xcoordinant][Ycoordinant] == 0) {
+    //checks to see if snake is at a specific location (X,Y coordinates)
+	public boolean isSnakeSegment(int Xcoordinate, int Ycoordinate) {
+		if (snakeSquares[Xcoordinate][Ycoordinate] == 0) {
 			return false;
 		}
 		return true;
 	}
 
 	public boolean didEatKibble(Kibble kibble) {
-		//If the x,y coordinants equal the x,y coordinants of the head, the snake is considered to have eaten the kibble, and should grow
+		//If the x,y coordinates equal the x,y coordinates of the head, the snake is considered to have eaten the kibble, and should grow
 		//Is this kibble in the snake? It should be in the same square as the snake's head
 		if (kibble.getKibbleX() == snakeHeadX && kibble.getKibbleY() == snakeHeadY){
 			justAteMustGrowThisMuch += growthIncrement;
@@ -260,17 +260,18 @@ public class Snake {
 		return false;
 	}
 
-	public String toString(){
-		String textsnake = "";
-		//This looks the wrong way around. Actually need to do it this way or snake is drawn flipped 90 degrees. 
-		for (int y = 0 ; y < maxY ; y++) {
-			for (int x = 0 ; x < maxX ; x++){
-				textsnake = textsnake + snakeSquares[x][y];
-			}
-			textsnake += "\n";
-		}
-		return textsnake;
-	}
+	//This doesn't appear to change the game...
+//	public String toString(){
+//		String textsnake = "";
+//		//This looks the wrong way around. Actually need to do it this way or snake is drawn flipped 90 degrees.
+//		for (int y = 0 ; y < maxY ; y++) {
+//			for (int x = 0 ; x < maxX ; x++){
+//				textsnake = textsnake + snakeSquares[x][y];
+//			}
+//			textsnake += "\n";
+//		}
+//		return textsnake;
+//	}
 
 	public boolean wonGame() {
 
