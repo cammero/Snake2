@@ -14,22 +14,16 @@ public class Snake extends VisualComponentLargerThanASquare{
 	private boolean ateTail = false;
 	private boolean hitComponent = false;
 
-	//private int snakeSquares[][];  //represents all of the squares on the screen
-	//NOT pixels!
-	//A 0 means there is no part of the snake in this square
-	//A non-zero number means part of the snake is in the square
-	//The head of the snake is 1, rest of segments are numbered in order
-
 	private int currentHeading;  //Direction snake is going in, or direction user is telling snake to go
 	private int lastHeading;    //Last confirmed movement of snake. See moveSnake method
 
-	private int growthIncrement = 2; //how many squares the snake grows after it eats a kibble
+	private int growthIncrement = 2; //How many squares the snake grows after it eats a kibble
 
 	private int justAteMustGrowThisMuch = 0;
 
-	private int snakeHeadX, snakeHeadY; //store coordinates of head - first segment
+	private int snakeHeadX, snakeHeadY; //Stores coordinates of head - first segment
 
-	private boolean warpWallsOn = false; //snake cannot go through walls without dying unless this is set to true
+	private boolean warpWallsOn = false; //Snake cannot go through walls without dying unless this is set to true
 
 	public Snake(int maxX, int maxY, int squareSize){
 		this.maxX = maxX;
@@ -37,21 +31,25 @@ public class Snake extends VisualComponentLargerThanASquare{
 		this.squareSize = squareSize;
         this.firstSegmentX = snakeHeadX;
         this.firstSegmentY = snakeHeadY;
-        this.size = 3; //size of snake - how many segments?
-		//Create and fill snakeSquares with 0s
+
+		//Create and fill gameSquares with 0s
 		gameSquares = new int[maxX][maxY];
 		fillGameSquaresWithZeros();
 		createStartSnake();
 	}
 
 	protected void createStartSnake(){
-		//snake starts as 3 horizontal squares in the center of the screen, moving left
+		//Snake starts as 3 horizontal squares in the center of the screen, moving left
+
 		int screenXCenter = (int) maxX/2;  //Cast just in case we have an odd number
 		int screenYCenter = (int) maxY/2;  //Cast just in case we have an odd number
 
+		//The head of the snake is 1, rest of segments are numbered in order
 		gameSquares[screenXCenter][screenYCenter] = 1;
         gameSquares[screenXCenter+1][screenYCenter] = 2;
         gameSquares[screenXCenter+2][screenYCenter] = 3;
+
+        size = 3; //size of snake - how many segments?
 
 		snakeHeadX = screenXCenter;
 		snakeHeadY = screenYCenter;
@@ -98,12 +96,14 @@ public class Snake extends VisualComponentLargerThanASquare{
 			currentHeading = DIRECTION_LEFT; //keep going the same way
 		}
 
+		//Checks to see if the snakeHead runs into a visual component larger than a square
+		//If so, it sets hitComponent to true
 		if (SnakeGame.mazeWall.isVisualComponentSegment(snakeHeadX, snakeHeadY)){
 			hitComponent = true;
 		}
 
 		//Did you hit the wall, snake? 
-		//Or eat your tail? Don't move. 
+		//Or eat your tail? Or run into another component like a maze wall? Don't move.
 
 		if (hitWall == true || ateTail == true || hitComponent == true) {
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
@@ -130,7 +130,7 @@ public class Snake extends VisualComponentLargerThanASquare{
 			}
 		}
 
-		//now identify where to add new snake head
+		//Now identify where to add new snake head
 		if (currentHeading == DIRECTION_UP) {		
 			//Subtract 1 from Y coordinate so head is one square up
 			snakeHeadY-- ;
@@ -201,8 +201,6 @@ public class Snake extends VisualComponentLargerThanASquare{
 		lastHeading = currentHeading; //Update last confirmed heading
 	}
 
-
-
 	protected boolean didHitWall(){
 		return hitWall;
 	}
@@ -261,13 +259,12 @@ public class Snake extends VisualComponentLargerThanASquare{
 		ateTail = false;
         hitComponent = false;
         warpWallsOn = false;
-
 		fillGameSquaresWithZeros();
 		createStartSnake();
 	}
 
 	public boolean isGameOver() {
-		if (hitWall == true || ateTail == true){
+		if (hitWall == true || ateTail == true || hitComponent == true){
 			SnakeGame.setGameStage(SnakeGame.GAME_OVER);
 			return true;
 		}

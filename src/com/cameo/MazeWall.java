@@ -42,11 +42,11 @@ public class MazeWall extends VisualComponentLargerThanASquare{
         The following statements are cast just in case we have an odd number.
         */
 
-        int oneFourthScreenX = (int) maxX / 4; //center of left quadrants
-        int threeFourthsScreenX = (int) maxX * 3 / 4; //center of right quadrants
+        int oneFourthScreenX = (int) maxX / 3; //center of left quadrants
+        int threeFourthsScreenX = (int) maxX * 2 / 3; //center of right quadrants
 
-        int oneFourthScreenY = (int) maxY / 4;  //center of lower quadrants
-        int threeFourthsScreenY = (int) maxY * 3 / 4; //center of upper quadrants
+        int oneFourthScreenY = (int) maxY / 3;  //center of lower quadrants
+        int threeFourthsScreenY = (int) maxY * 2 / 3; //center of upper quadrants
 
         //Quadrant 1 maze wall
         gameSquares[threeFourthsScreenX][threeFourthsScreenY] = 1;

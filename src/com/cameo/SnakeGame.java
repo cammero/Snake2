@@ -7,16 +7,13 @@ import javax.swing.*;
 
 public class SnakeGame {
 
-    //TODO Make Timer global?
-	public static Timer timer = new Timer();
-
-	public final static int xPixelMaxDimension = 601;  //Pixels in window. 501 to have 50-pixel squares plus 1 to draw a border on last square
-	public final static int yPixelMaxDimension = 601;
+	public final static int xPixelMaxDimension = 511;  //Pixels in window. 511 to have 50-pixel squares plus 1 to draw a border on last square
+	public final static int yPixelMaxDimension = 511;
 
 	public static int xSquares ;
 	public static int ySquares ;
 
-	public final static int squareSize = 40;
+	public final static int squareSize = 30;
 
 	protected static Snake snake ;
 
@@ -26,6 +23,7 @@ public class SnakeGame {
 
 	protected static Score score;
 
+    //List of all snakes and maze walls
     protected static ArrayList<VisualComponentLargerThanASquare> visualComponentArrayList;
 
 	static final int BEFORE_GAME = 1;
@@ -60,7 +58,8 @@ public class SnakeGame {
 		snakeFrame.setVisible(true);
 		snakeFrame.setResizable(false);
 
-		snakePanel = new DrawSnakeGamePanel(snake, kibble, score, mazeWall);
+        snakePanel = new DrawSnakeGamePanel(snake, kibble, score, mazeWall);
+
 		snakePanel.setFocusable(true);
 		snakePanel.requestFocusInWindow(); //required to give this component the focus so it can generate KeyEvents
 
@@ -73,7 +72,7 @@ public class SnakeGame {
 	}
 
 	private static void initializeGame() {
-		//set up score, snake and first kibble
+		//Set up score, snake and first kibble
 		xSquares = xPixelMaxDimension / squareSize;
 		ySquares = yPixelMaxDimension / squareSize;
 
@@ -81,16 +80,18 @@ public class SnakeGame {
 
 		score = new Score();
 		mazeWall = new MazeWall(xSquares, ySquares, squareSize);
+
         visualComponentArrayList = new ArrayList<>();
         visualComponentArrayList.add(snake);
         visualComponentArrayList.add(mazeWall);
-        kibble = new Kibble(visualComponentArrayList);
+
+		kibble = new Kibble(visualComponentArrayList);
 		gameStage = BEFORE_GAME;
 	}
 
 	protected static void newGame() {
-		//TODO make timer global?
-		//Timer timer = new Timer();
+
+		Timer timer = new Timer();
 		GameClock clockTick = new GameClock(snake, kibble, score, snakePanel);
 		timer.scheduleAtFixedRate(clockTick, 0 , clockInterval);
 	}
@@ -121,11 +122,4 @@ public class SnakeGame {
 		SnakeGame.gameStage = gameStage;
 	}
 
-    public static Timer getTimer() {
-        return timer;
-    }
-
-    public static void setTimer(Timer timer) {
-        SnakeGame.timer = timer;
-    }
 }

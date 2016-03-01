@@ -23,7 +23,7 @@ public class GameClock extends TimerTask {
 
 		switch (stage) {
 			case SnakeGame.BEFORE_GAME: {
-				//don't do anything, waiting for user to press a key to start
+				//Don't do anything, waiting for user to press a key to start
 				break;
 			}
 			case SnakeGame.DURING_GAME: {
@@ -41,11 +41,11 @@ public class GameClock extends TimerTask {
 				break;	
 			}
 			case SnakeGame.GAME_WON: {
-				this.cancel();   //stop timer
+				this.cancel();   //Stop timer
 				break;
 			}
 		}
 
-		gamePanel.repaint();		//In every circumstance, must update screen
+		gamePanel.repaint();	//In every circumstance, must update screen
 	}
 }

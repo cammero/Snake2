@@ -9,10 +9,14 @@ import java.util.LinkedList;
 public class VisualComponentLargerThanASquare {
 
     protected int gameSquares[][];  //represents all of the squares on the screen
+
     protected int maxX, maxY, squareSize;
     protected int size;   //number of segments (squares) of each component
     protected int firstSegmentX, firstSegmentY; //store coordinates of the first segment
 
+
+    //A 0 means there is no part of the snake in this square
+    //A non-zero number means part of the component is in the square
     protected void fillGameSquaresWithZeros() {
         for (int x = 0; x < this.maxX; x++){
             for (int y = 0 ; y < this.maxY ; y++) {

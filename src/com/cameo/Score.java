@@ -4,7 +4,6 @@ package com.cameo;
  * 
  */
 
-
 public class Score {
 
 	protected static int score;
@@ -13,8 +12,7 @@ public class Score {
 	
 	public Score(){
 		score = 0;
-		increment = 1;  //how many points for eating a kibble
-		//Possible TODO get more points for eating kibbles, the longer the snake gets?
+		increment = 1;  //Number of points for eating a kibble
 	}
 	
 	public static void resetScore() {
@@ -22,9 +20,7 @@ public class Score {
 	}
 	
 	public static void increaseScore() {
-		
 		score = score + increment;
-		
 	}
 	
 	public int getScore(){
@@ -32,8 +28,7 @@ public class Score {
 	}
 	
 	//Checks if current score is greater than the current high score. 
-	//updates high score and returns true if so.
-	
+	//Updates high score and returns true if so.
 	public boolean gameOver(){
 		
 		if (score > highScore) {
@@ -50,13 +45,12 @@ public class Score {
 	}
 
 	public String newHighScore() {
-		
 		if (score > highScore) {
 			highScore = score;
 			return "New High Score!!";
 		} else {
 			return "";
-	}
+		}
 	}
 
 	public String getStringHighScore() {
